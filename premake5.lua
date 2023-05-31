@@ -5,13 +5,16 @@ project "yaml-cpp"
     targetdir(g_workspaceDir .. "/bin/" .. g_outputDir .. "/%{prj.name}")
     objdir(g_workspaceDir .. "/bin-int/" .. g_outputDir .. "/%{prj.name}")
 
-    defines {"_CRT_SECURE_NO_WARNINGS", "YAML_CPP_STATIC_DEFINE"}
+    defines {
+      "_CRT_SECURE_NO_WARNINGS",
+      "YAML_CPP_STATIC_DEFINE"
+    }
 
     files {
-		"src/**.h",
-		"src/**.cpp",
+		  "src/**.h",
+		  "src/**.cpp",
 		
-		"include/**.h"
+		  "include/**.h"
     }
 
     includedirs {
