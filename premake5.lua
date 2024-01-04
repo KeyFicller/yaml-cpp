@@ -14,7 +14,8 @@ project "yaml-cpp"
 		  "src/**.h",
 		  "src/**.cpp",
 		
-		  "include/**.h"
+		  "include/**.h",
+          "premake5.lua"
     }
 
     includedirs {
@@ -25,7 +26,20 @@ project "yaml-cpp"
 
     }
 
-    filter "system:windows"
-        systemversion "latest"
-        cppdialect "C++17"
-        staticruntime "On"
+    postbuildcommands {
+        ("{COPY} %{cfg.buildtarget.relpath} \"../../bin/" .. envir_output_directory .. "/sandbox/\""),
+        ("{COPY} %{cfg.buildtarget.relpath} \"../../bin/" .. envir_output_directory .. "/unittest/\"")
+    }
+
+
+    filter "configurations:Debug"
+        runtime "Debug"
+        symbols "on"
+
+	filter "configurations:Release"
+        runtime "Release"
+        optimize "on"
+        flags {
+            "StaticRuntime"
+        }
+
